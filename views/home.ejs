@@ -1,0 +1,90 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce | <%= title  %> </title>  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>  
+  </head>
+  <body class="bg-zinc-500">
+
+    <div class="w-full bg-black">
+      <nav class="max-w-[1350px] h-[90px] mx-auto px-4 flex justify-between items-center text-white">
+        <a href="/" class="flex hover:cursor-pointer">
+          <span class="text-3xl text-blue-400">Ecommerce</span>
+        </a>    
+        <p class="text-2xl font-bold text-white">Bienvenido <%= user.nombre  %></p>      
+        <ul class="flex items-center mr-2 space-x-4">
+          <li class="w-[45px] h-[45px] relative group">
+            <img class="border-2 border-blue-400 hover:border-white duration-300 z-20 w-full h-full object-cover hover:cursor-pointer" src="<%= user.foto %>" alt="User Image">  
+              
+            <ul class="z-50 bg-black text-white absolute right-0  w-[120px] rounded-lg  border-b border-l border-r border-white overflow-hidden  hidden group-hover:block duration-300">
+              <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">              
+                <a href="/api/compras/myCompras">Compras</a>
+              </li>
+              <li class="py-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">
+                <a href="/api/carrito">Carrito</a>
+              </li>
+              <% if (user.isAdmin === 'N') { %>           
+                <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">              
+                  <a href="/api/chat">Chat</a>
+                </li>
+              <% } %>
+              <% if (user.isAdmin === 'S') { %>
+                <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500 flex items-center space-x-2">
+                  <a href="/api/admin" class="w-full flex items-center space-x-3">
+                    <p>Admin</p>
+                  </a>
+                </li>
+              <% } %>
+              <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">
+                <a href="/logout">Logout</a>
+              </li>            
+            </ul>  
+          </li>           
+        </ul>      
+      </nav>
+    </div>
+
+    
+  <div class="max-w-[1350px] mx-auto mt-8 px-4 "> 
+    <div class="w-full py-4 text-center">
+      <p class="text-3xl font-bold uppercase pb-2 text-white">Productos</p>      
+      <div class="w-full h-[2px] bg-red-200"></div>
+    </div>   
+    <div class="flex justify-center space-x-6 pb-6">
+      <button id="ver_pelis" class="bg-black text-white py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" onclick="cambiarColor(this)" data-categoria="peliculas"> Peliculas </button>
+      <button id="ver_juegos" class="bg-black text-white py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" onclick="cambiarColor(this)" data-categoria="juegos"> Juegos </button>
+    </div>
+    <div class="products_container w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-3 mb-5">            
+      <!-- Grilla con productos -->
+      <% for( let i = 0; i < productos.length; i++ ) { %>        
+        
+        <div class="group border border-black overflow-hidden hover:cursor-pointer rounded-md  hover:scale-105 duration-200">  
+          <p class="prod_id hidden id_product"> <%= productos[i]._id  %>  </p>
+          <p class="prod_categoria hidden"> <%= productos[i].categoria  %> </p>
+          <p class="prod_stock hidden"> <%= productos[i].stock  %> </p>          
+          <div>
+            <a href="/api/productos/detalle/<%= productos[i]._id %>">
+            <img class="prod_img h-[250px] w-full object-cover" src="<%= productos[i].foto %>"  alt="">          
+            </a>  
+          </div>
+          <div class="p-2">
+            <p class="prod_nombre font-extrabold text-lg"> <%= productos[i].nombre %> </p>
+            <p class="prod_desc font-bold text-white"> <%= productos[i].descripcion %> </p>
+            <div class="flex justify-between items-center">
+              <p class="prod_precio font-bold text-white"> Precio ($): <%= productos[i].precio.toString() %></p>                                   
+              <img class="btn_add w-[24px] hover:cursor-pointer hover:bg-white duration-300 rounded-full" src="/assets/add-icon.png" alt="Add Icon">
+            </div>
+          </div>
+        </div>        
+      <% } %>
+    </div>    
+  </div>
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="/js/home.js"></script>
+</body>
+</html>

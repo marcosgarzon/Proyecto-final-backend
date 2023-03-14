@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecommerce | <%= title  %> </title>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.tailwindcss.com"></script>  
+</head>
+<body class="bg-zinc-500">
+
+  <!-- Inicio NavBar -->
+  <div class="w-full bg-black">
+    <nav class="max-w-[1350px] h-[90px] mx-auto px-4 flex justify-between items-center text-white">
+      <a href="/" class="flex hover:cursor-pointer">
+        <span class="text-3xl text-blue-400">Ecommerce</span>
+      </a>    
+      <p class="text-2xl font-bold text-white">Bienvenido/a <%= user.nombre  %></p>      
+      <ul class="flex items-center mr-2 space-x-4">
+        <li class="w-[45px] h-[45px] relative group">
+          <img class="border-2 border-blue-400 hover:border-white duration-300 z-20 w-full h-full object-cover hover:cursor-pointer" src="<%= user.foto %>" alt="User Image">  
+            
+          <ul class="bg-black text-white absolute right-0  w-[120px] rounded-lg  border-b border-l border-r border-white overflow-hidden  hidden group-hover:block duration-300">
+            <li class="py-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">
+              <a href="/">Inicio</a>
+            </li>
+            <li class="py-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">
+              <a href="/api/carrito">Carrito</a>
+            </li>
+            <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">              
+              <a href="/api/ordenes/misOrdenes">Compras</a>
+            </li>
+            <% if (user.isAdmin === 'N') { %>           
+              <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">              
+                <a href="/api/chat">Chat</a>
+              </li>
+            <% } %>
+            <% if (user.isAdmin === 'S') { %>
+              <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500 flex items-center space-x-2">                
+                <a href="/api/admin" class="w-full flex items-center space-x-3">
+                  <p>Admin</p>
+                </a>
+              </li>
+            <% } %>
+            <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">
+              <a href="/logout">Logout</a>
+            </li>            
+          </ul>  
+        </li>               
+      </ul>        
+    </nav>
+  </div>
+  <!-- Fin NavBar -->
+
+  <div style="max-width: 1300px; margin: auto; margin-top: 8px; padding: 4px;">
+    <div style="width: 100%; text-align: center;">
+      <p style="font-size: 3rem; font-weight: bold; text-transform: uppercase; padding-bottom: 2px; color: white;">Compras</p>      
+      <div style="width: 100%; height: 2px; background-color: #FF4444;"></div>
+      <% if (ordenes.length === 0) { %>
+       <div style="width: 100%; margin-top: 6px; display: flex; flex-direction: column; gap: 4px;">
+          <p style="font-size: 4rem; text-transform: uppercase; color: white; font-weight: bold;">No ha realizado compras</p>
+          <a href="/" style="font-size: 1.5rem; margin: auto; width: 20%; background-color: #CCCCCC; color: black; text-align: center; padding: 10px; border-radius: 10px; cursor: pointer; transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;">Productos</a>
+       </div>
+      <% } %>
+    </div>
+    <div style="width: 100%; padding: 2px; display: flex;">      
+      <div id="compra_list" style="width: 55%; padding: 4px; padding-top: 12px;">
+        <% for( let i = 0; i < ordenes.length; i++ ) { %>
+          <div style="width: 100%; background-color: #CCCCCC; opacity: 0.9; padding: 10px; margin-top: 12px; display: flex; align-items: center; justify-content: space-between; font-weight: bold; border-radius: 10px;">
+            <% let fecha = new Date(ordenes[i].createdAt).toLocaleDateString() %>
+            <% let subtotal = ordenes[i].cart.subTotal %>
+            <p class="compra_id" style="display: none;"><%= ordenes[i].cart._id %></p>
+            <p style="font-size: 1.5rem;">Fecha de compra: <span style="font-size: 1.2rem; color: #FF4444;"><%= fecha %></span></p>
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <p style="font-size: 1.5rem;">Monto $: <span style="font-size: 1.2rem; color: #FF4444;"><%= subtotal %></span></p>
+              <div class="btn_ver_compra" style="cursor: pointer;">
+                <img style="width: 30px; height: 30px; transition: background-color 0.3s, cursor 0.3s;" src="/assets/lupi.png" alt="Ver Detalle">                
+              </div>
+            </div>
+          </div>
+        <% } %> 
+      </div>
+    
+      <!-- Detalle de la Compra -->
+      <div id="compra_detail" class="w-[40%] h-auto mt-6 p-4 bg-gray-400 border-2 rounded-lg shadow-xl">
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>      
+  <script src="/js/ordenes.js"></script>   
+</body>
+</html>

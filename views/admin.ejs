@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecommerce | <%= title  %> </title>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.tailwindcss.com"></script>  
+</head>
+<body class="bg-zinc-500">
+
+
+  <!-- Inicio NavBar -->
+  <div class="w-full bg-black">
+    <nav class="max-w-[1300px] h-[90px] mx-auto px-4 flex justify-between items-center text-white">
+      <a href="/" class="flex hover:cursor-pointer">
+        <span class="text-3xl text-blue-400">Ecommerce</span>
+      </a>    
+      <p class="text-2xl font-bold text-white">Bienvenido <%= user.nombre  %></p>      
+      <ul class="flex items-center mr-2 space-x-4">
+        <li class="w-[45px] h-[45px] relative group">
+          <img class="border-2 border-blue-400 hover:border-white duration-300 z-20 w-full h-full object-cover hover:cursor-pointer" src="<%= user.foto %>" alt="User Image">            
+          <ul class="bg-black text-white absolute right-0  w-[120px] rounded-lg  border-b border-l border-r border-white overflow-hidden  hidden group-hover:block duration-300">
+            <li class="py-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">
+              <a href="/">Inicio</a>
+            </li>
+            <li class="py-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">
+              <a href="/api/carrito">Carrito</a>
+            </li>
+            <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">              
+              <a href="/api/compras/myCompras">Compras</a>
+            </li>
+            <% if (user.isAdmin === 'S') { %>
+              <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500 flex items-center space-x-2">                
+                <p>Admin</p>
+              </li>
+            <% } %>
+            <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">
+              <a href="/logout">Logout</a>
+            </li>            
+          </ul>  
+        </li>               
+      </ul>        
+    </nav>
+  </div>
+  <!-- Fin NavBar --> 
+
+  <div class="max-w-[1350px] mx-auto mt-8 px-4 "> 
+    <div class="w-full text-center">   
+      <div class="w-full h-[2px] bg-red-200"></div>
+    </div>
+
+    <div class="pt-5 flex space-x-2">
+      <div class="w-[15%]">
+        <div class="flex flex-col pt-3 px-3">
+          <div class="flex flex-col hover:cursor-pointer text-white font-bold">
+            <div class="flex items-center">
+              <p id="item_usuarios" class="text-lg">Usuarios</p>          
+            </div>
+            <input id="buscar_user" class="my-1 hidden px-2 py-1 text-black rounded-md focus:outline-none" type="text" placeholder="Buscar nombre...">
+          </div>
+          <div class="flex flex-col hover:cursor-pointer text-white font-bold">
+            <div class="flex items-center">
+              <p id="item_productos" class="text-lg">Productos</p>          
+            </div>
+            <input id="buscar_prod" class="my-1 hidden px-2 py-1 text-black rounded-md focus:outline-none" type="text" placeholder="Buscar...">
+          </div>
+          <div class="flex items-center hover:cursor-pointer text-white font-bold">
+            <p id="item_compras" class="text-lg">Compras</p>
+          </div>
+          <div class="flex items-center hover:cursor-pointer text-white font-bold">
+            <p id="item_chat" class="text-lg">Chat</p>
+          </div>
+        </div>
+      </div>
+  
+      <div id="lista_cosas" class="w-[85%] px-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">                
+      </div>
+
+      <div id="lista_compras" class="w-full p-2 hidden border-2 border-gray-500 rounded-md">
+        <div class="w-full mx-auto flex items-center justify-center space-x-4 text-lg">
+          <p class="text-white font-bold text-xl">Entre</p>
+          <input class="rounded-md px-2 text-xl" id="fch_desde" type='date' min='1899-01-01' max='2060-02-26'></input>
+          <p class="text-white font-bold text-xl">y</p>
+          <input class="rounded-md px-2 text-xl" id="fch_hasta" type='date' min='1899-01-01' max='2060-02-26'></input>
+          <a id="btn_buscar_compras" alt="Buscar Compras"><img class="w-[30px] hover:cursor-pointer hover:scale-110 p-1 duration-300" src="/assets/search.jpg" ></a>
+        </div>
+        <div id="lista_compras_header" class="mt-6 w-[95%] mx-auto">
+          <div class="w-full my-3 px-6 py-2 flex items-center border-2 rounded-lg flex justify-between">
+            <div class="flex items-center">
+              <img src="/assets/search.jpg" class="w-[50px] object-cover mr-8" alt="Buscar Compras">
+              <p class="text-black text-2xl font-bold mr-10">Markete</p>
+              <p class="text-black text-2xl font-bold mr-10">Fecha: 28/01/23</p>
+              <p class="text-black text-2xl font-bold">Monto ($): <span class="text-red-400">300</span></p>
+            </div>
+            <img src="/assets/eye.png" class="w-[40px] object-cover hover:cursor-pointer" alt="Buscar Compras">
+          </div>                     
+        </div>
+      </div>      
+    </div>
+  </div>
+
+  <!-- Pantalla modal para ver el detalle de la compra seleccionada -->
+  <div id="modal_compra" class="hidden absolute top-0 left-0 z-20 w-screen h-screen flex items-center justify-center bg-black/40">
+    
+  </div>
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/js/admin.js"></script>   
+  </body>
+</html>

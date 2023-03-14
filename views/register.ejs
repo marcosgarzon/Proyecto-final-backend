@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecommerce | <%= title  %> </title>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.tailwindcss.com"></script>  
+</head>
+<body class="bg-zinc-500">
+
+  <div class="w-full  relative">
+    <img class="absolute z-10 top-0 left-0 w-full h-screen" src="/assets/bg.jpg" alt="BG">
+    <div class="absolute z-20 top-0 left-0 w-full h-screen bg-black/70"></div>
+    <div class="bg-black/90 absolute left-0 top-0 w-full h-[90px] z-30">
+      <nav class="max-w-[1350px] h-[90px] mx-auto px-4 flex justify-between items-center text-white">
+        <a href="/" class="flex">
+          <span class="text-3xl text-blue-400">Ecommerce</span>   
+        </a>    
+        <div>
+          <a class='text-xl font-bold hover:text-gray-600' href="/login">LOGIN</a>
+        </div>
+      </nav>
+    </div>    
+
+    <div class="absolute top-0 left-0 right-0 max-w-[100%] pb-6 bg-white mx-auto py-8 px-4 mt-20 z-30 bg-opacity-40 backdrop-blur-sm rounded-lg drop-shadow-lg">
+      <div class="w-full text-center">
+        <p class="text-4xl text-white">REGISTER USER</p>
+      </div>
+      
+      <div class="w-full mx-auto text-2xl font-bold pt-2">
+        <% if (messages.error) { %>
+        <p class="text-center text-red-800"> <%= messages.error %>  </p>
+        <% } %>
+      </div>
+
+      <form action="/register" method="POST" enctype="multipart/form-data" class="mx-auto flex items-center justify-between">        
+        <div class="py-8 w-1/3 h-3/4 flex flex-col justify-around items-center"> 
+          <div class="h-40 w-40 mb-6 bg-blue-500 overflow-hidden relative flex items-center justify-center">
+            <img class="absolute left-0 top-0 w-full h-full object-cover" id="chosen_image">
+          </div>
+          <input class='hidden flex-1 p-3 outline-none rounded-xl' type="file" name="foto" id="foto" accept="image/*" required>
+          <label class='px-3 bg-white text-black hover:bg-black hover:text-white hover:shadow-lg duration-300 rounded-lg py-1 hover:cursor-pointer' for="foto">Seleccione Foto</label>          
+          <p class="text-black font-bold">(Obligatorio)</p>
+        </div> 
+        <div class="flex-1">
+          <div class="flex items-center justify-between space-x-3">
+            <div class="flex flex-col py-2 flex-1">
+              <label class='font-bold text-white text-lg' for="email">Email</label>
+              <input class='flex-1 p-3 outline-none rounded-xl' type="text" name="email" id="email" required>
+            </div>
+            <div class="flex flex-col py-2 flex-1">
+              <label class='font-bold text-white text-lg' for="password">Password</label>
+              <input class='flex-1 p-3 outline-none rounded-xl' type="password" name="password" id="password" required>
+            </div>
+          </div> 
+          <div class="flex items-center justify-between space-x-3">
+            <div class="flex flex-col py-2 flex-1">
+              <label class='font-bold text-white text-xl' for="name">Nombre</label>
+              <input class='flex-1 p-3 outline-none rounded-xl' type="text" name="name" id="name" required>
+            </div>   
+            <div class="flex flex-col py-2 flex-1">
+              <label class='font-bold text-white text-xl' for="direccion">Dirección</label>
+              <input class='flex-1 p-3 outline-none rounded-xl' type="text" name="direccion" id="direccion" required>
+            </div> 
+          </div> 
+          <div class="flex items-center justify-between space-x-3">
+            <div class="flex flex-col py-2 flex-1">
+              <label class='font-bold text-white text-xl' for="telefono">Teléfono</label>
+              <input class='flex-1 p-3 outline-none rounded-xl' type="text" name="telefono" id="telefono" required>
+            </div> 
+            <div class="flex flex-col py-2">
+              <label class='font-bold text-white text-xl' for="edad">Edad</label>
+              <input class='flex-1 p-3 outline-none rounded-xl' type="number" name="edad" id="edad" min="1" max="100" required>
+            </div>             
+          </div>
+          <div class="w-full text-center text-lg font-bold">
+            <input type="checkbox" name="isAdmin" id="isAdmin">
+            <label for="isAdmin">¿Usuario Administrador?</label>
+          </div>
+          <div class="w-[50%] mx-auto pt-4">
+            <input class='w-full bg-white text-black hover:bg-black hover:text-white hover:shadow-lg duration-300 rounded-lg py-2 hover:cursor-pointer' type="submit" value="Register">
+          </div>                     
+          <div class="w-full flex justify-center">
+            <a href="/login" class="text-center text-lg text-black hover:text-white hover:cursor-pointer pt-3">Go to Login Page</a>                
+          </div> 
+        </div>
+        
+      </form>
+    </div> 
+
+  </div>
+   <script src="/js/register.js"></script>
+</body>
+</html>

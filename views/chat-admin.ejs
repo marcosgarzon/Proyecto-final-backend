@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecommerce | <%= title  %> </title>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.tailwindcss.com"></script>  
+</head>
+<body class="bg-zinc-500">
+
+  <!-- Inicio NavBar -->
+  <div class="w-full bg-black">
+    <nav class="max-w-[1350px] h-[90px] mx-auto px-4 flex justify-between items-center text-white">
+      <a href="/" class="flex hover:cursor-pointer">
+        <span class="text-3xl text-blue-400">Ecommerce</span>
+      </a>  
+      <p class="admin_id hidden"><%= user._id %></p>  
+      <p class="text-2xl font-bold text-white">Bienvenido <%= user.nombre  %></p>      
+      <ul class="flex items-center mr-2 space-x-4">
+        <li class="w-[45px] h-[45px] relative group">
+          <img class="border-2 border-blue-400 hover:border-white duration-300 z-20 w-full h-full object-cover hover:cursor-pointer" src="<%= user.foto %>" alt="User Image">  
+            
+          <ul class="bg-black text-white absolute right-0  w-[120px] rounded-lg  border-b border-l border-r border-white overflow-hidden  hidden group-hover:block duration-300">
+            <li class="py-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">
+              <a href="/">Inicio</a>
+            </li>
+            <li class="py-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">
+              <a href="/api/carrito">Carrito</a>
+            </li>
+            <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">              
+              <a href="/api/compras/myCompras">Compras</a>
+            </li>            
+            <% if (user.isAdmin === 'S') { %>
+              <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500 flex items-center space-x-2">                
+                <a href="/api/admin" class="w-full flex items-center space-x-3">
+                  <p>Admin</p>
+                </a>
+              </li>
+            <% } %>
+            <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">
+              <a href="/logout">Logout</a>
+            </li>            
+          </ul>  
+        </li>               
+      </ul>        
+    </nav>
+  </div>
+  <!-- Fin NavBar -->
+
+  <div class="max-w-[100%] mx-auto px-4">
+    <div class="w-full py-4 text-center">
+      <p class="text-4xl font-bold uppercase pb-2 text-gray-300">Mensajes Usuarios</p>      
+      <div class="w-full h-[2px] bg-yellow-500"></div>
+    </div> 
+    <div class="w-full h-[calc(100vh-200px)] flex space-x-4">
+      <!-- Lista de usuarios -->
+      <div class="w-[20%] h-full border-2 rounded-lg shadow-xl bg-gray-800 text-gray-300">
+        <p class="text-center pt-3 pb-1 uppercase text-xl font-bold">Usuarios</p>
+        <div class="w-full h-[2px] bg-yellow-500"></div>
+        <div id="lista_usuarios" class="w-full p-2"></div>
+      </div>
+      <div class="flex-1 h-full border-2 rounded-lg shadow-xl p-2 bg-gray-800 text-gray-300">
+        <div class="flex h-full flex-col">
+          <div id="msj_list" class="h-full flex-1 overflow-y-scroll"></div>
+          <div>
+            <input id="msj_usr" class="w-full px-2 py-3 text-lg outline-none rounded-lg mt-2 bg-gray-700 text-gray-300" type="text" name="mensaje" id="mensaje" placeholder="Escribe tu mensaje (ENTER para enviar)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script> 
+  <script src="/js/chat-admin.js"></script>
+  </body>
+</html>   

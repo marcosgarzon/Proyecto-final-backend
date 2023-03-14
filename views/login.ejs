@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecommerce | <%= title  %> </title>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.tailwindcss.com"></script>  
+</head>
+<body class="bg-zinc-500">
+
+  <div class="w-full h-screen relative">
+    <div class="absolute z-20 top-0 left-0 w-full h-screen bg-black/70"></div>
+    <div class="bg-black/90 absolute left-0 top-0 w-full h-[90px] z-30">
+      <nav class="max-w-[1350px] h-[90px] mx-auto px-4 flex justify-between items-center text-white">
+        <div class="flex">
+          <span class="text-3xl text-blue-400">Ecommerce</span>    
+        </div>    
+        <div>
+          <a class='text-xl font-bold hover:text-gray-600' href="/register">REGISTER</a>
+        </div>
+      </nav>
+    </div>    
+
+    <div class="absolute top-[0] left-0 right-0 bottom-5 max-w-[100%] bg-white mx-auto py-8 px-4 mt-20 z-30 bg-opacity-40 backdrop-blur-sm rounded-lg drop-shadow-lg">
+      <div class="w-full text-center">
+        <p class="text-4xl text-white">LOGIN</p>
+      </div>
+      
+      <div class="w-full mx-auto text-2xl font-bold pt-2">
+        <% if (messages.error) { %>
+        <p class="text-center text-red-800"> <%= messages.error %>  </p>
+        <% } %>
+      </div>
+
+      <form action="/login" method="POST" class="max-w-[400px] mx-auto">    
+        <div class="flex flex-col py-3">
+          <label class='font-bold text-white text-xl' for="email">Email</label>
+          <input class='flex-1 p-3 outline-none rounded-xl' type="text" name="email" id="email">
+        </div>
+        <div class="flex flex-col py-3">
+          <label class='font-bold text-white text-xl' for="password">Password</label>
+          <input class='flex-1 p-3 outline-none rounded-xl' type="password" name="password" id="password">
+        </div>      
+        <div class="w-[50%] mx-auto pt-4">
+          <input class='w-full bg-white text-black hover:bg-black hover:text-white hover:shadow-lg duration-300 rounded-lg py-2 hover:cursor-pointer' type="submit" value="Log In">
+        </div>                     
+        <div class="w-full flex justify-center">
+          <a href="/register" class="text-center text-lg text-black hover:text-white hover:cursor-pointer pt-3">Don´t have an account?</a>                
+        </div> 
+        
+      </form>
+    </div> 
+  </div>  
+</body>
+</html>

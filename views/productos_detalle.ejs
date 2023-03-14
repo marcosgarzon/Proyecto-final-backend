@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ecommerce | <%= title  %> </title>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.tailwindcss.com"></script>  
+</head>
+<body class="bg-zinc-500">
+     <!-- Inicio NavBar -->
+     <div class="w-full bg-black">
+        <nav class="max-w-[1350px] h-[90px] mx-auto px-4 flex justify-between items-center text-white z-50" style="z-index: 100;">
+          <a href="/" class="flex hover:cursor-pointer">
+            <span class="text-3xl text-blue-400">Ecommerce</span>
+          </a>    
+          <p class="text-2xl font-bold text-white">Bienvenido/a <%= user.nombre  %></p>      
+          <ul class="flex items-center mr-2 space-x-4">
+            <li class="w-[45px] h-[45px] relative group">
+              <img class="border-2 border-blue-400 hover:border-white duration-300 z-20 w-full h-full object-cover hover:cursor-pointer" src="<%= user.foto %>" alt="User Image">  
+                
+              <ul class="bg-black text-white absolute right-0  w-[120px] rounded-lg  border-b border-l border-r border-white overflow-hidden  hidden group-hover:block duration-300">
+                <li class="py-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">
+                  <a href="/">Inicio</a>
+                </li>
+                <li class="py-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">
+                  <a href="/api/carrito">Carrito</a>
+                </li>
+                <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">              
+                  <a href="/api/compras/myCompras">Compras</a>
+                </li>
+                <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">              
+                  <a href="/api/chat">Chat</a>
+                </li>
+                <% if (user.isAdmin === 'S') { %>
+                  <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500 flex items-center space-x-2">                
+                    <a href="/api/admin" class="w-full flex items-center space-x-3">
+                      <p>Admin</p>
+                    </a>
+                  </li>
+                <% } %>
+                <li class="pb-1 text-lg font-bold hover:cursor-pointer px-2 hover:bg-red-500">
+                  <a href="/logout">Logout</a>
+                </li>            
+              </ul>  
+            </li>               
+          </ul>        
+        </nav>
+      </div>
+        <!-- Fin NavBar -->
+
+        <p id="prod_foto" class="prod_foto hidden"><%= producto.foto %> </p> 
+        <p id="prod_nombre" class="prod_nombre hidden"><%= producto.nombre %> </p> 
+        <p id="prod_id" class="prod_id hidden"><%= producto._id %> </p>
+        <p id="prod_desc" class="prod_desc hidden"><%= producto.descripcion %> </p>
+        <p id="prod_categoria" class="prod_categoria hidden"><%= producto.categoria %> </p>  
+        <p id="prod_stock" class="prod_stock hidden"><%= producto.stock %> </p>   
+        <p id="prod_precio" class="prod_precio hidden"><%= producto.price %> </p> 
+        
+
+
+        <div class="max-w-[1300px] mx-auto px-4 py-1 text-white font-['Poppins'] mt-10">
+            <p class="text-3xl py-2">Características</p>
+            <div class="py-2 w-full grid grid-cols-1 md:grid-cols-4 gap-8">
+              <div class="text-black bg-white border-2 border-white p-3 flex items-center rounded-lg space-x-5 shadow-lg hover:shadow-xl">
+                <p class="text-lg font-bold">Categoría: <%= producto.categoria %></p>
+              </div>
+              <div class="text-black bg-white border-2 border-white p-3 flex items-center rounded-lg space-x-5 shadow-lg hover:shadow-xl">
+                <p class="text-lg font-bold">Descripción: <%= producto.descripcion %></p>
+              </div>
+              <div class="text-black bg-white border-2 border-white p-3 flex items-center rounded-lg space-x-5 shadow-lg hover:shadow-xl">
+                <p class="text-lg font-bold">Precio: $<%= producto.precio %></p>
+              </div>
+              <div class="text-black bg-white border-2 border-white p-3 flex items-center rounded-lg space-x-5 shadow-lg hover:shadow-xl">
+                <p class="text-lg font-bold">Stock: <%= producto.stock %></p>
+              </div>
+            </div>
+              </div>    
+    <div class="relative z-10 w-full h-96 ">
+    <img class="w-full h-full object-cover" src="<%= producto.foto %>" alt="<%= producto.nombre %>">
+    <div class="absolute top-0 left-0 w-full h-full bg-black/40"></div>
+    <div class="absolute top-0 left-0 right-0 z-20 max-w-[1300px] h-full mx-auto flex items-center justify-start">
+      <p class="font-['Poppins'] text-white text-6xl font-bold"><%= producto.nombre %></p>      
+    </div>
+    <div class="absolute bottom-0 left-0 h-[80px] w-full bg-gradient-to-t from-gray-600  to-transparent"></div>
+  </div>
+  
+
+
+
+
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  </body>
+  </html>    
