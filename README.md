@@ -55,9 +55,21 @@ Open a terminal and navigate to the repository directory.
 Run the command npm start to start the server in production mode.
 
 ![image](https://user-images.githubusercontent.com/96453171/230512270-5bd32747-dc09-4a53-b8de-74f6af5a4b73.png)  
+  
+    
 ![image](https://user-images.githubusercontent.com/96453171/230512350-f5ef203e-ea15-4c67-a145-b91fdcf23c8f.png)  
+  
+    
 ![image](https://user-images.githubusercontent.com/96453171/230512379-09073282-41ad-4896-8e58-1aab24474703.png)  
+  
+    
 ![image](https://user-images.githubusercontent.com/96453171/230512444-a31bac0f-f72d-4cf2-8ab4-86ab8d83133d.png)  
+  
+    
 ![image](https://user-images.githubusercontent.com/96453171/230512520-b484486e-a182-4a54-a2d3-04fad04a6c1f.png)  
+  
+    
 ![image](https://user-images.githubusercontent.com/96453171/230512575-123a0a71-8e51-40c9-8457-a4c181f65557.png)  
+  
+    
 ![image](https://user-images.githubusercontent.com/96453171/230512615-a5ed374e-5961-4110-bcfa-672f61b89cf6.png)  
